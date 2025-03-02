@@ -1,0 +1,20 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.salesRouter = void 0;
+const controller_1 = require("../app/purchase/controller");
+const controller_2 = require("../app/sales/controller");
+const user_1 = require("../app/user");
+const middleware_1 = require("../global/middleware");
+const role_1 = require("../global/middleware/role");
+const express_1 = require("express");
+const salesRouter = (0, express_1.Router)();
+exports.salesRouter = salesRouter;
+const controllerSales = new controller_2.SalesController();
+const controllerPurchase = new controller_1.PurchaseController();
+salesRouter.post("/sales/create", middleware_1.AuthGuard, (0, role_1.RoleGuard)([user_1.Role.admin]), controllerSales.create);
+salesRouter.get("/sales/active", middleware_1.AuthGuard, controllerSales.getActiveSale);
+salesRouter.patch("/sales/activate/:id", middleware_1.AuthGuard, (0, role_1.RoleGuard)([user_1.Role.admin]), controllerSales.activateSale);
+salesRouter.get("/sales/leaderboard/:id", controllerSales.getLeaderboard);
+salesRouter.patch("/sales/resetInventory/:id", middleware_1.AuthGuard, (0, role_1.RoleGuard)([user_1.Role.admin]), controllerSales.resetSaleInventory);
+salesRouter.post("/purchase/create", middleware_1.AuthGuard, (0, role_1.RoleGuard)([user_1.Role.user, user_1.Role.admin]), controllerPurchase.create);
+//# sourceMappingURL=sales.js.map
