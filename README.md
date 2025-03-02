@@ -61,7 +61,7 @@ To test this implementation:
 # How to Run This Project
 
 1. Clone the repository
-2. Install dependencies with `bash npm install`
+2. Install dependencies with `npm install`
 3. Create a .env file with:
 
 ```bash
@@ -75,7 +75,7 @@ echo "NODE_ENV=development" >> .env
 ```
 
 4. Start MongoDB (locally or use MongoDB Atlas)
-5. Run with `bash npm start` or `bash npm run start:dev` for development mode
+5. Run with `npm start` or `npm run start:dev` for development mode
 
 # ⚠️ IMPORTANT NOTE:
 
@@ -85,7 +85,7 @@ In a real-world production environment, sales would be activated automatically b
 
 # API Documentation
 
-1. Enter `bash http://localhost:5000/api-doc` this will download a json file.
+1. Enter `http://localhost:5000/api-doc` this will download a json file.
 2. Go to add postman or insomnia api client
 3. Click on import
 4. select file and choose the downloaded file.
