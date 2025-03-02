@@ -53,6 +53,7 @@ export class SalesServices {
 
   async activateSale(param: Types.ObjectId) {
     try {
+      const now = new Date();
       const sale = await Sales.findById(param);
       if (!sale) {
         throw new Error("Sale not found");
@@ -60,6 +61,10 @@ export class SalesServices {
 
       // deactivate any currently active sales
       await Sales.updateMany({ isActive: true }, { isActive: false });
+
+      if (sale.startTime > now) {
+        throw new Error("Sale start time is not reached yet");
+      }
 
       sale.isActive = true;
       await sale.save();

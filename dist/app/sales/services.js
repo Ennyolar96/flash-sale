@@ -47,11 +47,15 @@ class SalesServices {
     }
     async activateSale(param) {
         try {
+            const now = new Date();
             const sale = await model_1.Sales.findById(param);
             if (!sale) {
                 throw new Error("Sale not found");
             }
             await model_1.Sales.updateMany({ isActive: true }, { isActive: false });
+            if (sale.startTime > now) {
+                throw new Error("Sale start time is not reached yet");
+            }
             sale.isActive = true;
             await sale.save();
             await sale.populate("product");
