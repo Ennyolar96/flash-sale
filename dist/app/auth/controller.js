@@ -10,7 +10,10 @@ class AuthController {
     async login(req, res) {
         try {
             const body = (0, class_transformer_1.plainToInstance)(auth_dto_1.Login, req.body);
-            const errors = await (0, class_validator_1.validate)(body);
+            const errors = await (0, class_validator_1.validate)(body, {
+                whitelist: true,
+                forbidNonWhitelisted: true,
+            });
             if (errors.length > 0) {
                 const formattedErrors = errors.map((error) => ({
                     property: error.property,
@@ -37,7 +40,10 @@ class AuthController {
     async register(req, res) {
         try {
             const body = (0, class_transformer_1.plainToInstance)(auth_dto_1.Register, req.body);
-            const errors = await (0, class_validator_1.validate)(body);
+            const errors = await (0, class_validator_1.validate)(body, {
+                whitelist: true,
+                forbidNonWhitelisted: true,
+            });
             if (errors.length > 0) {
                 const formattedErrors = errors.map((error) => ({
                     property: error.property,

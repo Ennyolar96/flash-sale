@@ -10,7 +10,10 @@ export class PurchaseController {
   async create(req: AuthRequest, res: Response) {
     try {
       const body = plainToInstance(NewPurchase, req.body);
-      const errors = await validate(body);
+      const errors = await validate(body, {
+        whitelist: true,
+        forbidNonWhitelisted: true,
+      });
 
       if (errors.length > 0) {
         const formattedErrors = errors.map((error) => ({

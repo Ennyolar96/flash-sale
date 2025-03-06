@@ -10,7 +10,10 @@ export class UserController {
   async findUser(req: Request, res: Response) {
     try {
       const param = plainToInstance(singleUser, req.params);
-      const errors = await validate(param);
+      const errors = await validate(param, {
+        whitelist: true,
+        forbidNonWhitelisted: true,
+      });
 
       if (errors.length > 0) {
         const formattedErrors = errors.map((error) => ({

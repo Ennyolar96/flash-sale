@@ -10,7 +10,10 @@ class ProductController {
     async create(req, res) {
         try {
             const body = (0, class_transformer_1.plainToInstance)(product_dto_1.CreateProduct, req.body);
-            const errors = await (0, class_validator_1.validate)(body);
+            const errors = await (0, class_validator_1.validate)(body, {
+                whitelist: true,
+                forbidNonWhitelisted: true,
+            });
             if (errors.length > 0) {
                 const formattedErrors = errors.map((error) => ({
                     property: error.property,
@@ -50,7 +53,10 @@ class ProductController {
     async getSingleProduct(req, res) {
         try {
             const param = (0, class_transformer_1.plainToInstance)(product_dto_1.SingleProduct, req.params);
-            const errors = await (0, class_validator_1.validate)(param);
+            const errors = await (0, class_validator_1.validate)(param, {
+                whitelist: true,
+                forbidNonWhitelisted: true,
+            });
             if (errors.length > 0) {
                 const formattedErrors = errors.map((error) => ({
                     property: error.property,

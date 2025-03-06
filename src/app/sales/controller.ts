@@ -9,7 +9,10 @@ export class SalesController {
   async create(req: Request, res: Response) {
     try {
       const body = plainToInstance(CreateSales, req.body);
-      const errors = await validate(body);
+      const errors = await validate(body, {
+        whitelist: true,
+        forbidNonWhitelisted: true,
+      });
 
       if (errors.length > 0) {
         const formattedErrors = errors.map((error) => ({
@@ -54,7 +57,10 @@ export class SalesController {
   async activateSale(req: Request, res: Response) {
     try {
       const param = plainToInstance(SingleSales, req.params);
-      const errors = await validate(param);
+      const errors = await validate(param, {
+        whitelist: true,
+        forbidNonWhitelisted: true,
+      });
 
       if (errors.length > 0) {
         const formattedErrors = errors.map((error) => ({
@@ -86,7 +92,10 @@ export class SalesController {
   async getLeaderboard(req: Request, res: Response) {
     try {
       const param = plainToInstance(SingleSales, req.params);
-      const errors = await validate(param);
+      const errors = await validate(param, {
+        whitelist: true,
+        forbidNonWhitelisted: true,
+      });
 
       if (errors.length > 0) {
         const formattedErrors = errors.map((error) => ({
@@ -118,7 +127,10 @@ export class SalesController {
   async resetSaleInventory(req: Request, res: Response) {
     try {
       const param = plainToInstance(SingleSales, req.params);
-      const errors = await validate(param);
+      const errors = await validate(param, {
+        whitelist: true,
+        forbidNonWhitelisted: true,
+      });
 
       if (errors.length > 0) {
         const formattedErrors = errors.map((error) => ({

@@ -10,7 +10,10 @@ class PurchaseController {
     async create(req, res) {
         try {
             const body = (0, class_transformer_1.plainToInstance)(purchase_dto_1.NewPurchase, req.body);
-            const errors = await (0, class_validator_1.validate)(body);
+            const errors = await (0, class_validator_1.validate)(body, {
+                whitelist: true,
+                forbidNonWhitelisted: true,
+            });
             if (errors.length > 0) {
                 const formattedErrors = errors.map((error) => ({
                     property: error.property,

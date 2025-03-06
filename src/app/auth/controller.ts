@@ -9,7 +9,10 @@ export class AuthController {
   async login(req: Request, res: Response) {
     try {
       const body = plainToInstance(Login, req.body);
-      const errors = await validate(body);
+      const errors = await validate(body, {
+        whitelist: true,
+        forbidNonWhitelisted: true,
+      });
 
       if (errors.length > 0) {
         const formattedErrors = errors.map((error) => ({
@@ -36,7 +39,10 @@ export class AuthController {
   async register(req: Request, res: Response) {
     try {
       const body = plainToInstance(Register, req.body);
-      const errors = await validate(body);
+      const errors = await validate(body, {
+        whitelist: true,
+        forbidNonWhitelisted: true,
+      });
 
       if (errors.length > 0) {
         const formattedErrors = errors.map((error) => ({

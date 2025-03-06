@@ -10,7 +10,10 @@ class SalesController {
     async create(req, res) {
         try {
             const body = (0, class_transformer_1.plainToInstance)(sale_dto_1.CreateSales, req.body);
-            const errors = await (0, class_validator_1.validate)(body);
+            const errors = await (0, class_validator_1.validate)(body, {
+                whitelist: true,
+                forbidNonWhitelisted: true,
+            });
             if (errors.length > 0) {
                 const formattedErrors = errors.map((error) => ({
                     property: error.property,
@@ -54,7 +57,10 @@ class SalesController {
     async activateSale(req, res) {
         try {
             const param = (0, class_transformer_1.plainToInstance)(sale_dto_1.SingleSales, req.params);
-            const errors = await (0, class_validator_1.validate)(param);
+            const errors = await (0, class_validator_1.validate)(param, {
+                whitelist: true,
+                forbidNonWhitelisted: true,
+            });
             if (errors.length > 0) {
                 const formattedErrors = errors.map((error) => ({
                     property: error.property,
@@ -85,7 +91,10 @@ class SalesController {
     async getLeaderboard(req, res) {
         try {
             const param = (0, class_transformer_1.plainToInstance)(sale_dto_1.SingleSales, req.params);
-            const errors = await (0, class_validator_1.validate)(param);
+            const errors = await (0, class_validator_1.validate)(param, {
+                whitelist: true,
+                forbidNonWhitelisted: true,
+            });
             if (errors.length > 0) {
                 const formattedErrors = errors.map((error) => ({
                     property: error.property,
@@ -116,7 +125,10 @@ class SalesController {
     async resetSaleInventory(req, res) {
         try {
             const param = (0, class_transformer_1.plainToInstance)(sale_dto_1.SingleSales, req.params);
-            const errors = await (0, class_validator_1.validate)(param);
+            const errors = await (0, class_validator_1.validate)(param, {
+                whitelist: true,
+                forbidNonWhitelisted: true,
+            });
             if (errors.length > 0) {
                 const formattedErrors = errors.map((error) => ({
                     property: error.property,
