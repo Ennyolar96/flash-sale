@@ -15,6 +15,8 @@ class PurchaseServices {
         session.startTransaction();
         try {
             if (body.quantity <= 0 || body.quantity > config_1.config.MAX_PURCHASE_PER_USER) {
+                await session.abortTransaction();
+                session.endSession();
                 throw new Error(`Invalid quantity. Maximum allowed: ${config_1.config.MAX_PURCHASE_PER_USER}`);
             }
             const sale = await model_1.Sales.findById(body.saleId).session(session);

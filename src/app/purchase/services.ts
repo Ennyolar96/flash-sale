@@ -13,6 +13,8 @@ export class PurchaseServices {
 
     try {
       if (body.quantity <= 0 || body.quantity > config.MAX_PURCHASE_PER_USER) {
+        await session.abortTransaction();
+        session.endSession();
         throw new Error(
           `Invalid quantity. Maximum allowed: ${config.MAX_PURCHASE_PER_USER}`
         );
